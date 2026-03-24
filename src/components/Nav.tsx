@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
-const sections = [
+const navItems = [
   { id: 'about', label: 'About' },
   { id: 'work', label: 'Work' },
   { id: 'beyond', label: 'Beyond' },
   { id: 'timeline', label: 'Timeline' },
-  { id: 'contact', label: 'Contact' },
 ]
 
 export function Nav() {
@@ -15,7 +14,7 @@ export function Nav() {
   useEffect(() => {
     const observers: IntersectionObserver[] = []
 
-    sections.forEach(({ id }) => {
+    navItems.forEach(({ id }) => {
       const element = document.getElementById(id)
       if (!element) return
 
@@ -46,26 +45,26 @@ export function Nav() {
 
   return (
     <motion.nav
-      initial={{ opacity: 0, y: -20 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.8, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ delay: 0.8, duration: 0.5 }}
       style={{
         position: 'fixed',
-        top: 24,
+        bottom: 32,
         left: '50%',
         transform: 'translateX(-50%)',
         zIndex: 100,
-        background: 'rgba(14, 13, 12, 0.88)',
-        backdropFilter: 'blur(16px)',
-        border: '1px solid rgba(240, 237, 230, 0.12)',
+        background: '#1A1816',
+        border: '1px solid rgba(255,255,255,0.12)',
         borderRadius: 100,
-        padding: '10px 28px',
+        padding: '8px 8px 8px 24px',
         display: 'flex',
-        gap: 28,
         alignItems: 'center',
+        gap: 0,
+        boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
       }}
     >
-      {sections.map(({ id, label }) => (
+      {navItems.map(({ id, label }) => (
         <a
           key={id}
           href={`#${id}`}
@@ -74,18 +73,56 @@ export function Nav() {
             scrollToSection(id)
           }}
           style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: 13,
-            fontWeight: 400,
-            color: activeSection === id ? 'var(--text-primary)' : 'var(--text-muted)',
-            textDecoration: 'none',
+            fontFamily: 'DM Sans, sans-serif',
+            fontSize: 14,
+            fontWeight: activeSection === id ? 500 : 400,
+            color: activeSection === id ? '#F0EDE6' : 'rgba(240,237,230,0.5)',
+            padding: '8px 20px',
             cursor: 'pointer',
             transition: 'color 200ms',
+            textDecoration: 'none',
+            background: 'none',
+          }}
+          onMouseEnter={(e) => {
+            if (activeSection !== id) {
+              e.currentTarget.style.color = 'rgba(240,237,230,0.9)'
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (activeSection !== id) {
+              e.currentTarget.style.color = 'rgba(240,237,230,0.5)'
+            }
           }}
         >
           {label}
         </a>
       ))}
+      <button
+        onClick={() => scrollToSection('contact')}
+        style={{
+          background: '#D4A84B',
+          color: '#0E0D0C',
+          fontFamily: 'DM Sans',
+          fontSize: 14,
+          fontWeight: 500,
+          padding: '10px 24px',
+          borderRadius: 100,
+          border: 'none',
+          cursor: 'pointer',
+          marginLeft: 8,
+          transition: 'background 200ms, transform 150ms',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = '#E8C06A'
+          e.currentTarget.style.transform = 'scale(1.02)'
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = '#D4A84B'
+          e.currentTarget.style.transform = 'scale(1)'
+        }}
+      >
+        Contact
+      </button>
     </motion.nav>
   )
 }
