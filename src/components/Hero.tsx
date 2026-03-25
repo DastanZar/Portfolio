@@ -170,13 +170,8 @@ export function Hero() {
       </div>
 
       {/* Right Column */}
-      <div
-        className="relative"
-        style={{
-          width: '45%',
-          position: 'relative',
-        }}
-      >
+      <div className="relative w-full md:w-2/5 flex flex-col justify-between items-end min-h-[50vh] md:min-h-full">
+        
         {/* Rotating Badge */}
         <div
           style={{
@@ -241,15 +236,14 @@ export function Hero() {
             </g>
           </svg>
         </div>
-
-        {/* Doodle Illustration */}
-        <div className="w-full flex justify-end md:justify-center items-end mt-8 md:mt-16 pr-4 md:pr-0">
-          <img
-            src="/images/doodle.png"
-            alt="Avihai Illustration"
-            style={{ filter: 'brightness(0)', opacity: 0.85, width: '100%', maxWidth: '300px', height: 'auto' }}
-          />
-        </div>
+        
+        {/* Doodle - bottom aligned, anchored natively */}
+        <img
+          src="/images/doodle.png"
+          alt="Avihai Illustration"
+          className="w-full max-w-[280px] md:max-w-[450px] h-auto mt-auto opacity-85"
+          style={{ filter: 'brightness(0)' }}
+        />
       </div>
 
       {/* Bottom Edge */}
