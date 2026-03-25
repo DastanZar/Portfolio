@@ -50,9 +50,12 @@ export function Nav() {
       transition={{ delay: 0.8, duration: 0.5 }}
       style={{
         position: 'fixed',
-        bottom: 32,
-        left: '50%',
-        transform: 'translateX(-50%)',
+        bottom: '32px',
+        left: '0',
+        right: '0',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        width: 'max-content',
         zIndex: 100,
         background: '#1A1816',
         border: '1px solid rgba(255,255,255,0.12)',

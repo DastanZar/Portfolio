@@ -5,8 +5,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export function useLenis() {
+export function useLenis(disabled: boolean = false) {
   useEffect(() => {
+    if (disabled) return
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -24,5 +26,5 @@ export function useLenis() {
       lenis.destroy()
       gsap.ticker.remove((time) => lenis.raf(time * 1000))
     }
-  }, [])
+  }, [disabled])
 }

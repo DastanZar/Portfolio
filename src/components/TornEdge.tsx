@@ -3,20 +3,19 @@ interface TornEdgeProps {
 }
 
 export function TornEdge({ variant }: TornEdgeProps) {
-  const fillColor = variant === 'dark-to-light' ? '#F5F0E8' : '#0E0D0C'
-
   return (
-    <svg
-      width="100%"
-      height="80"
-      viewBox="0 0 1440 80"
-      preserveAspectRatio="none"
-      style={{ display: 'block' }}
-    >
-      <path
-        d="M0,80 L0,45 Q20,28 40,48 Q60,65 80,40 Q100,18 120,42 Q140,62 160,38 Q180,16 200,44 Q220,68 240,42 Q260,20 280,46 Q300,66 320,40 Q340,16 360,48 Q380,68 400,38 Q420,14 440,44 Q460,70 480,40 Q500,14 520,46 Q540,68 560,38 Q580,14 600,44 Q620,70 640,40 Q660,14 680,48 Q700,68 720,38 Q740,14 760,44 Q780,70 800,40 Q820,14 840,48 Q860,68 880,38 Q900,14 920,44 Q940,70 960,40 Q980,14 1000,48 Q1020,68 1040,38 Q1060,14 1080,44 Q1100,70 1120,40 Q1140,14 1160,48 Q1180,68 1200,38 Q1220,14 1240,44 Q1260,70 1280,40 Q1300,14 1320,48 Q1340,68 1360,38 Q1380,14 1400,44 Q1420,70 1440,46 L1440,80 Z"
-        fill={fillColor}
-      />
-    </svg>
+    <div className="w-full h-10 md:h-12 overflow-hidden -mt-1 relative z-10 flex items-end">
+      <svg
+        viewBox="0 0 1200 50"
+        preserveAspectRatio="none"
+        className="w-full h-full block"
+        style={{ transform: variant === 'light-to-dark' ? 'rotate(180deg)' : 'none' }}
+      >
+        <path
+          fill={variant === 'dark-to-light' ? '#F5F0E8' : '#0E0D0C'}
+          d="M0,50 L0,15 L20,20 L40,10 L60,25 L80,5 L100,18 L120,8 L140,22 L160,12 L180,28 L200,15 L220,30 L240,10 L260,25 L280,12 L300,20 L320,8 L340,22 L360,5 L380,18 L400,10 L420,25 L440,15 L460,28 L480,12 L500,20 L520,8 L540,25 L560,10 L580,22 L600,15 L620,28 L640,12 L660,20 L680,8 L700,25 L720,10 L740,22 L760,15 L780,28 L800,12 L820,20 L840,8 L860,25 L880,10 L900,22 L920,15 L940,28 L960,12 L980,20 L1000,8 L1020,25 L1040,10 L1060,22 L1080,15 L1100,28 L1120,12 L1140,20 L1160,8 L1180,25 L1200,15 L1200,50 Z"
+        />
+      </svg>
+    </div>
   )
 }

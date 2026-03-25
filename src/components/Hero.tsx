@@ -171,10 +171,10 @@ export function Hero() {
 
       {/* Right Column */}
       <div
+        className="relative"
         style={{
           width: '45%',
           position: 'relative',
-          overflow: 'hidden',
         }}
       >
         {/* Rotating Badge */}
@@ -243,220 +243,12 @@ export function Hero() {
         </div>
 
         {/* Doodle Illustration */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: 400,
-            height: 420,
-          }}
-        >
-          <svg
-            width="400"
-            height="420"
-            viewBox="0 0 400 420"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {/* Desk */}
-            <rect
-              x="60"
-              y="240"
-              width="280"
-              height="8"
-              fill="#1A1916"
-            />
-            <rect
-              x="80"
-              y="248"
-              width="8"
-              height="120"
-              fill="#1A1916"
-            />
-            <rect
-              x="312"
-              y="248"
-              width="8"
-              height="120"
-              fill="#1A1916"
-            />
-
-            {/* Chair */}
-            <path
-              d="M 180 368 L 180 320 L 220 320 L 220 368"
-              stroke="#1A1916"
-              strokeWidth="2"
-              fill="none"
-            />
-            <rect
-              x="170"
-              y="368"
-              width="60"
-              height="8"
-              fill="#1A1916"
-            />
-
-            {/* Body */}
-            <path
-              d="M 200 200 L 200 280 L 180 320 L 220 320 L 200 280"
-              stroke="#1A1916"
-              strokeWidth="2"
-              fill="none"
-            />
-            <path
-              d="M 180 200 L 180 240 L 160 280"
-              stroke="#1A1916"
-              strokeWidth="2"
-              fill="none"
-            />
-            <path
-              d="M 220 200 L 220 240 L 240 280"
-              stroke="#1A1916"
-              strokeWidth="2"
-              fill="none"
-            />
-
-            {/* Shirt pattern */}
-            <line
-              x1="185"
-              y1="210"
-              x2="185"
-              y2="230"
-              stroke="#1A1916"
-              strokeWidth="1"
-            />
-            <line
-              x1="195"
-              y1="210"
-              x2="195"
-              y2="230"
-              stroke="#1A1916"
-              strokeWidth="1"
-            />
-            <line
-              x1="205"
-              y1="210"
-              x2="205"
-              y2="230"
-              stroke="#1A1916"
-              strokeWidth="1"
-            />
-            <line
-              x1="215"
-              y1="210"
-              x2="215"
-              y2="230"
-              stroke="#1A1916"
-              strokeWidth="1"
-            />
-
-            {/* Head */}
-            <circle
-              cx="200"
-              cy="120"
-              r="28"
-              fill="none"
-              stroke="#1A1916"
-              strokeWidth="2"
-            />
-
-            {/* Hair */}
-            <path
-              d="M 172 120 Q 172 92 200 92 Q 228 92 228 120"
-              stroke="#1A1916"
-              strokeWidth="2"
-              fill="none"
-            />
-            <path
-              d="M 175 100 Q 180 95 185 100"
-              stroke="#1A1916"
-              strokeWidth="1.5"
-              fill="none"
-            />
-            <path
-              d="M 190 95 Q 200 88 210 95"
-              stroke="#1A1916"
-              strokeWidth="1.5"
-              fill="none"
-            />
-            <path
-              d="M 215 100 Q 220 95 225 100"
-              stroke="#1A1916"
-              strokeWidth="1.5"
-              fill="none"
-            />
-
-            {/* Face */}
-            <circle cx="190" cy="115" r="2" fill="#1A1916" />
-            <circle cx="210" cy="115" r="2" fill="#1A1916" />
-            <path
-              d="M 192 130 Q 200 136 208 130"
-              stroke="#1A1916"
-              strokeWidth="1.5"
-              fill="none"
-            />
-
-            {/* Laptop */}
-            <rect
-              x="160"
-              y="210"
-              width="80"
-              height="50"
-              rx="2"
-              fill="none"
-              stroke="#1A1916"
-              strokeWidth="2"
-            />
-            <rect
-              x="165"
-              y="215"
-              width="70"
-              height="35"
-              fill="none"
-              stroke="#1A1916"
-              strokeWidth="1"
-            />
-            <rect
-              x="150"
-              y="260"
-              width="100"
-              height="6"
-              rx="1"
-              fill="#1A1916"
-            />
-
-            {/* Arm resting on desk */}
-            <path
-              d="M 240 240 L 260 240 L 260 250"
-              stroke="#1A1916"
-              strokeWidth="2"
-              fill="none"
-            />
-
-            {/* Trophy on desk */}
-            <path
-              d="M 300 220 L 300 200 L 290 190 L 310 190 L 300 200"
-              stroke="#1A1916"
-              strokeWidth="1.5"
-              fill="none"
-            />
-            <rect
-              x="295"
-              y="220"
-              width="10"
-              height="8"
-              fill="#1A1916"
-            />
-            <rect
-              x="292"
-              y="228"
-              width="16"
-              height="4"
-              fill="#1A1916"
-            />
-          </svg>
+        <div className="w-full flex justify-end md:justify-center items-end mt-8 md:mt-16 pr-4 md:pr-0">
+          <img
+            src="/images/doodle.png"
+            alt="Avihai Illustration"
+            style={{ filter: 'brightness(0)', opacity: 0.85, width: '100%', maxWidth: '300px', height: 'auto' }}
+          />
         </div>
       </div>
 
