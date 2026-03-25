@@ -94,7 +94,7 @@ export function Credentials() {
         position: 'relative',
         zIndex: 1,
         padding: '128px 0',
-        backgroundColor: '#0A1210',
+        backgroundColor: '#051F17',
         overflow: 'hidden',
       }}
     >
@@ -163,14 +163,17 @@ export function Credentials() {
                   inset: 0,
                   width: '100%',
                   height: '100%',
-                  backgroundColor: '#161A18',
-                  border: '1px solid rgba(255, 255, 255, 0.05)',
+                  backgroundColor: '#0A2E22',
+                  border: '1px solid #144737',
                   borderRadius: 4,
                   padding: 32,
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
                   backfaceVisibility: 'hidden',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
+                  boxShadow: '0 20px 50px rgba(0, 0, 0, 0.3)',
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
