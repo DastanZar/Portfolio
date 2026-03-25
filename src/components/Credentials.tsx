@@ -3,30 +3,56 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+gsap.registerPlugin(ScrollTrigger)
+
 const credentials = [
   {
-    id: 1,
-    type: 'wide',
-    title: 'Google Cloud Ready Facilitator 2024',
-    subtitle: 'ML & Cloud Infrastructure Education',
+    id: '01',
+    title: 'Oracle GenAI & Vector Search',
+    issuer: 'Oracle University',
+    date: '2025',
+    front: 'Dual Professional Certifications',
+    back: '1Z0-184-25 & 1Z0-1127-25. Built chained LangChain-style agents and hybrid SQL+VECTOR queries at 10K QPS.',
   },
   {
-    id: 2,
-    type: 'square',
-    title: 'IEEE Research',
-    subtitle: 'Nanoelectronics Atlas 4.1 ASIC',
+    id: '02',
+    title: 'Investor Awareness Certification',
+    issuer: 'SEBI / NISM',
+    date: '2025',
+    front: 'Series-XXVI (96% Score)',
+    back: 'Near-perfect score on derivatives, debt instruments, and mutual funds regulations.',
   },
   {
-    id: 3,
-    type: 'square',
-    title: 'MOAI Club',
-    metric: '15+ Listeners',
+    id: '03',
+    title: 'Google Cloud Skill Badges',
+    issuer: 'Google Cloud',
+    date: '2021',
+    front: '10x Technical Badges',
+    back: 'GKE microservices, Vertex AI APIs, and BigQuery ETL. 99.9% uptime architectures.',
   },
   {
-    id: 4,
-    type: 'wide',
-    title: 'Teach For India',
-    subtitle: 'Grade 6 Mathematics & English',
+    id: '04',
+    title: 'Aspire Leaders Program',
+    issuer: 'Harvard-Backed',
+    date: '2025',
+    front: 'Global Top 2% Cohort',
+    back: 'Advanced from 46,000 applicants. Led international pod on AI ethics; accessed alumni seed grant.',
+  },
+  {
+    id: '05',
+    title: '0 to 100 Full-Stack',
+    issuer: '100x Engineers',
+    date: '2025',
+    front: '12-Week Intensive',
+    back: 'MERN stack, Kubernetes, DevOps CI/CD. Built API serving 5K concurrent users.',
+  },
+  {
+    id: '06',
+    title: 'Advanced ML & AI',
+    issuer: '365 Data Science',
+    date: '2025',
+    front: '8-Course Specialization',
+    back: 'End-to-end pipelines, Math Foundations, Deep Learning, and GPT-4 interview simulators.',
   },
 ]
 
@@ -35,138 +61,223 @@ export function Credentials() {
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger)
-    gsap.defaults({ ease: 'power2.out' })
-
-    const cards = document.querySelectorAll('.credential-card')
-    
-    gsap.fromTo(cards, 
-      { scale: 0.9, opacity: 0 },
-      {
-        scale: 1,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: container.current,
-          start: 'top 80%',
-        }
-      }
-    )
+    ScrollTrigger.batch('.credential-card', {
+      onEnter: (elements) => {
+        gsap.fromTo(
+          elements,
+          {
+            scale: 0.8,
+            opacity: 0,
+            filter: 'blur(15px)',
+            y: 60,
+          },
+          {
+            scale: 1,
+            opacity: 1,
+            filter: 'blur(0px)',
+            y: 0,
+            stagger: 0.15,
+            duration: 1.2,
+            ease: 'back.out(1.4)',
+          }
+        )
+      },
+      start: 'top 85%',
+    })
   }, { scope: container })
 
   return (
     <section
       ref={container}
       id="credentials"
-      className="credentials"
       style={{
         position: 'relative',
         zIndex: 1,
-        padding: '120px 2rem',
-        backgroundColor: '#0E0D0C',
+        padding: '128px 0',
+        backgroundColor: '#0A1210',
+        overflow: 'hidden',
       }}
     >
-      <p
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', marginBottom: 80 }}>
+        <span
+          style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: 11,
+            color: '#8A8680',
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+          }}
+        >
+          / 04
+        </span>
+        <h2
+          style={{
+            fontFamily: "'DM Serif Display', Georgia, serif",
+            fontSize: 'clamp(32px, 5vw, 48px)',
+            color: '#F5F0E8',
+            marginLeft: 32,
+            display: 'inline',
+          }}
+        >
+          Credentials & Honors
+        </h2>
+      </div>
+
+      <div
         style={{
-          fontFamily: "'JetBrains Mono', monospace",
-          fontSize: 11,
-          color: '#4A4744',
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
-          marginBottom: 48,
+          display: 'grid',
+          gridTemplateColumns: 'repeat(1, 1fr)',
+          gap: 32,
+          maxWidth: 1200,
+          margin: '0 auto',
+          padding: '0 24px',
         }}
       >
-        / 05 Credentials
-      </p>
-
-      <div className="credentials-grid">
-        {credentials.map((item) => (
+        {credentials.map((cred) => (
           <div
-            key={item.id}
-            className={`credential-card credential-card--${item.type}`}
+            key={cred.id}
+            className="credential-card"
             style={{
-              backgroundColor: '#1A1916',
-              border: '1px solid rgba(240, 237, 230, 0.08)',
-              borderRadius: 'var(--radius-sm, 4px)',
-              padding: '2rem',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              minHeight: item.type === 'wide' ? '180px' : '200px',
+              position: 'relative',
+              height: 288,
+              width: '100%',
+              perspective: '1000px',
+              cursor: 'pointer',
             }}
           >
-            <h3
+            <div
+              className="credential-card-inner"
               style={{
-                fontFamily: "'DM Serif Display', Georgia, serif",
-                fontSize: item.type === 'wide' ? '28px' : '22px',
-                color: '#F0EDE6',
-                marginBottom: item.metric ? '0.5rem' : '0.75rem',
-                lineHeight: 1.2,
-                transition: 'color 0.3s ease',
+                width: '100%',
+                height: '100%',
+                transition: 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)',
+                transformStyle: 'preserve-3d',
+                boxShadow: '0 20px 50px rgba(212, 168, 75, 0.08)',
+                transform: 'translateY(-8px)',
               }}
-              className="credential-title"
             >
-              {item.title}
-            </h3>
-            {item.subtitle && (
-              <p
+              {/* Front */}
+              <div
                 style={{
-                  fontFamily: "'DM Sans', system-ui, sans-serif",
-                  fontSize: '14px',
-                  color: '#8A8680',
+                  position: 'absolute',
+                  inset: 0,
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: '#161A18',
+                  border: '1px solid rgba(255, 255, 255, 0.05)',
+                  borderRadius: 4,
+                  padding: 32,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  backfaceVisibility: 'hidden',
                 }}
               >
-                {item.subtitle}
-              </p>
-            )}
-            {item.metric && (
-              <p
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <span
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: 12,
+                      color: '#D4A84B',
+                    }}
+                  >
+                    {cred.date}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: 12,
+                      color: '#8A8680',
+                      textAlign: 'right',
+                      maxWidth: '50%',
+                    }}
+                  >
+                    {cred.issuer}
+                  </span>
+                </div>
+                <div>
+                  <h3
+                    style={{
+                      fontFamily: "'DM Serif Display', Georgia, serif",
+                      fontSize: 24,
+                      color: '#F5F0E8',
+                      marginBottom: 8,
+                      lineHeight: 1.2,
+                    }}
+                  >
+                    {cred.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: "'DM Sans', system-ui, sans-serif",
+                      fontSize: 14,
+                      color: '#8A8680',
+                    }}
+                  >
+                    {cred.front}
+                  </p>
+                </div>
+              </div>
+
+              {/* Back */}
+              <div
                 style={{
-                  fontFamily: "'DM Sans', system-ui, sans-serif",
-                  fontSize: '36px',
-                  fontWeight: 500,
-                  color: '#D4A84B',
+                  position: 'absolute',
+                  inset: 0,
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: '#D4A84B',
+                  borderRadius: 4,
+                  padding: 32,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  transform: 'rotateY(180deg)',
+                  backfaceVisibility: 'hidden',
                 }}
               >
-                {item.metric}
-              </p>
-            )}
+                <h3
+                  style={{
+                    fontFamily: "'DM Serif Display', Georgia, serif",
+                    fontSize: 20,
+                    color: '#0E0D0C',
+                    marginBottom: 12,
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {cred.title}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: "'DM Sans', system-ui, sans-serif",
+                    fontSize: 14,
+                    color: 'rgba(14, 13, 12, 0.85)',
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {cred.back}
+                </p>
+              </div>
+            </div>
           </div>
         ))}
       </div>
 
       <style>{`
-        .credentials-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 1rem;
+        .credential-card:hover .credential-card-inner {
+          transform: rotateY(180deg) translateY(-8px) !important;
+        }
+
+        @media (min-width: 768px) {
+          #credentials > div:last-of-type {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
         }
 
         @media (min-width: 1024px) {
-          .credentials {
-            padding: 120px 2.77778vw;
+          #credentials > div:last-of-type {
+            grid-template-columns: repeat(3, 1fr) !important;
           }
-
-          .credentials-grid {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-          }
-
-          .credential-card--wide {
-            grid-column: span 2;
-          }
-        }
-
-        .credential-card {
-          transition: border-color 0.3s ease;
-        }
-
-        .credential-card:hover {
-          border-color: rgba(240, 237, 230, 0.2);
-        }
-
-        .credential-card:hover .credential-title {
-          color: #D4A84B;
         }
       `}</style>
     </section>
