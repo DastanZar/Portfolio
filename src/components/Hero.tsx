@@ -241,7 +241,7 @@ export function Hero() {
         <img
           src="/images/doodle.png"
           alt="Avihai Illustration"
-          className="w-full max-w-[280px] md:max-w-[450px] h-auto mt-auto opacity-85"
+          className="w-full max-w-[280px] md:max-w-[450px] h-auto mt-auto opacity-85 -translate-x-[80px] md:-translate-x-[60px]"
           style={{ filter: 'brightness(0)' }}
         />
       </div>
