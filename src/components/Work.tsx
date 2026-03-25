@@ -1,268 +1,172 @@
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const projects = [
-  {
-    number: '01',
-    title: 'AegisML Ops Engine',
-    description: 'A self-healing ML infrastructure system. Real-time anomaly detection with automatic model retraining. FastAPI backend, React frontend, Prometheus metrics.',
-    tags: ['AKS', 'Prometheus', 'FastAPI', 'Python', 'ML'],
-    metric: '100%',
-    metricLabel: 'model accuracy',
-    side: 'left', // image on left, text on right
-  },
-  {
-    number: '02',
-    title: 'HaloGenie Observability Stack',
-    description: 'Full observability stack for an Azure OpenAI-powered IVR product serving enterprise clients including Flipkart. Prometheus, Grafana, AlertManager on AKS.',
-    tags: ['Azure', 'Grafana', 'AlertManager', 'AKS', 'GitLab CI'],
-    metric: '132',
-    metricLabel: 'page SRE knowledge base',
-    side: 'right', // image on right, text on left
-  },
-  {
-    number: '03',
-    title: 'Flask Alert Relay',
-    description: 'A microservice bridging Prometheus AlertManager to Slack and PagerDuty. Built and deployed to production as part of the HaloGenie platform.',
-    tags: ['Flask', 'Docker', 'Prometheus', 'Slack API'],
-    metric: '24/7',
-    metricLabel: 'uptime monitoring',
-    side: 'left',
-  },
-  {
-    number: '04',
-    title: 'MOAI Club',
-    description: 'Community initiative running bi-weekly listener circles in Delhi. 13–15 participants per session. Co-hosting Death Café events with a clinical psychologist.',
-    tags: ['Community', 'Mental Health', 'Social Impact'],
-    metric: '13–15',
-    metricLabel: 'participants per session',
-    side: 'right',
-  },
+  // Row 1
+  { id: '01', title: 'AegisML Ops Engine', desc: 'Self-healing ML infrastructure', img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop' },
+  { id: '02', title: 'HaloGenie Stack', desc: 'Azure OpenAI Observability', img: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2000&auto=format&fit=crop' },
+  { id: '03', title: 'MOAI Club Platform', desc: 'Community listening circles', img: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop' },
+  // Row 2
+  { id: '04', title: 'SRE Knowledge Base', desc: '132-page Confluence system', img: 'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=2000&auto=format&fit=crop' },
+  { id: '05', title: 'Autonomous Job Agent', desc: 'AI-driven application pipeline', img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop' },
+  { id: '06', title: 'Portfolio Generator', desc: 'Resume-to-website architecture', img: 'https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=2000&auto=format&fit=crop' }
 ]
 
-function ProjectRow({ project, index }: { project: typeof projects[0]; index: number }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
-  const imageFrom = project.side === 'left' ? -120 : 120
-  const textFrom = project.side === 'left' ? 120 : -120
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0 }}
-      animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      style={{
-        display: 'flex',
-        flexDirection: project.side === 'left' ? 'row' : 'row-reverse',
-        gap: 48,
-        marginBottom: 80,
-        alignItems: 'center',
-      }}
-    >
-      {/* Image side */}
-      <motion.div
-        initial={{ opacity: 0, x: imageFrom }}
-        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: imageFrom }}
-        transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        style={{
-          flex: '0 0 45%',
-          height: 400,
-          backgroundColor: '#1A1916',
-          borderRadius: 12,
-          position: 'relative',
-          overflow: 'hidden',
-          border: '1px solid rgba(240, 237, 230, 0.08)',
-        }}
-      >
-        {/* Project number watermark */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 24,
-            left: 24,
-            fontFamily: 'var(--font-display)',
-            fontSize: 120,
-            fontStyle: 'italic',
-            color: 'rgba(201, 169, 110, 0.15)',
-            lineHeight: 1,
-            pointerEvents: 'none',
-          }}
-        >
-          {project.number}
-        </div>
-        {/* Placeholder label */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 24,
-            left: 24,
-            fontFamily: 'var(--font-mono)',
-            fontSize: 11,
-            color: '#4A4744',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-          }}
-        >
-          PREVIEW COMING SOON
-        </div>
-      </motion.div>
-
-      {/* Text side */}
-      <motion.div
-        initial={{ opacity: 0, x: textFrom }}
-        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: textFrom }}
-        transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        style={{ flex: 1 }}
-      >
-        <span
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: 11,
-            color: '#4A4744',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            display: 'block',
-            marginBottom: 16,
-          }}
-        >
-          {project.number}
-        </span>
-
-        <h3
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 36,
-            color: '#F0EDE6',
-            marginBottom: 16,
-            lineHeight: 1.2,
-          }}
-        >
-          {project.title}
-        </h3>
-
-        <p
-          style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: 15,
-            color: '#8A8680',
-            lineHeight: 1.7,
-            marginBottom: 24,
-          }}
-        >
-          {project.description}
-        </p>
-
-        {/* Metric */}
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 24 }}>
-          <span
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 48,
-              fontStyle: 'italic',
-              color: '#C9A96E',
-              lineHeight: 1,
-            }}
-          >
-            {project.metric}
-          </span>
-          <span
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 11,
-              color: '#4A4744',
-              letterSpacing: '0.05em',
-              textTransform: 'uppercase',
-            }}
-          >
-            {project.metricLabel}
-          </span>
-        </div>
-
-        {/* Tags */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 24 }}>
-          {project.tags.map(tag => (
-            <span
-              key={tag}
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 11,
-                color: '#4A4744',
-                padding: '4px 10px',
-                backgroundColor: 'rgba(240, 237, 230, 0.05)',
-                borderRadius: 100,
-                border: '1px solid rgba(240, 237, 230, 0.08)',
-              }}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        <a
-          href="#"
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: 12,
-            color: '#C9A96E',
-            textDecoration: 'none',
-            letterSpacing: '0.05em',
-          }}
-        >
-          View Case Study →
-        </a>
-      </motion.div>
-    </motion.div>
-  )
-}
-
 export function Work() {
+  const container = useRef(null)
+
+  useGSAP(() => {
+    gsap.registerPlugin(ScrollTrigger)
+
+    const rows = document.querySelectorAll('.projects-row')
+    
+    rows.forEach((row, rowIndex) => {
+      const leftCard = row.querySelector('.card-left')
+      const centerCard = row.querySelector('.card-center')
+      const rightCard = row.querySelector('.card-right')
+
+      // SET INITIAL STATE (hidden before animation)
+      gsap.set(leftCard, { x: -220, opacity: 0 })
+      gsap.set(centerCard, { y: 80, opacity: 0 })
+      gsap.set(rightCard, { x: 220, opacity: 0 })
+
+      // SLIDE IN TIMELINE when row enters viewport
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: row,
+          start: 'top 80%',
+          end: 'top 30%',
+          toggleActions: 'play none none reverse',
+        }
+      })
+
+      tl.to(leftCard, { x: 0, opacity: 1, duration: 1.0, ease: 'power3.out' }, 0)
+        .to(centerCard, { y: 0, opacity: 1, duration: 1.0, ease: 'power3.out' }, 0.15)
+        .to(rightCard, { x: 0, opacity: 1, duration: 1.0, ease: 'power3.out' }, 0.05)
+
+      // SLIDE OUT when scrolling past (row exits upward)
+      if (rowIndex < rows.length - 1) {
+        gsap.to(row, {
+          y: -60,
+          opacity: 0,
+          ease: 'power2.in',
+          scrollTrigger: {
+            trigger: row,
+            start: 'bottom 20%',
+            end: 'bottom -10%',
+            scrub: 1,
+          }
+        })
+      }
+    })
+  }, { scope: container })
+
   return (
     <section
+      ref={container}
       id="work"
+      className="projects-section"
       style={{
-        backgroundColor: '#0E0D0C',
-        padding: '120px 48px',
+        padding: '120px 40px',
+        background: '#0a0a0a',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 40,
+        overflow: 'hidden',
       }}
     >
-      <div
+      <p
         style={{
-          maxWidth: 1200,
-          margin: '0 auto',
+          fontFamily: 'JetBrains Mono, monospace',
+          fontSize: 11,
+          color: '#4A4744',
+          letterSpacing: '0.1em',
+          textTransform: 'uppercase',
+          marginBottom: 24,
         }}
       >
-        <div style={{ marginBottom: 80 }}>
-          <p
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 11,
-              color: '#4A4744',
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              marginBottom: 16,
-            }}
-          >
-            / 03 Selected Work
-          </p>
-          <h2
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 56,
-              color: '#F0EDE6',
-              lineHeight: 1.1,
-            }}
-          >
-            Projects
-          </h2>
-        </div>
+        / 03 Selected Work
+      </p>
 
-        <div>
-          {projects.map((project, index) => (
-            <ProjectRow key={project.number} project={project} index={index} />
-          ))}
+      {/* Row 1 */}
+      <div className="projects-row" data-row="1">
+        <div className="project-card card-left">
+          <img src={projects[0].img} alt={projects[0].title} />
+          <div className="card-overlay"><span>{projects[0].title}</span></div>
+        </div>
+        <div className="project-card card-center">
+          <img src={projects[1].img} alt={projects[1].title} />
+          <div className="card-overlay"><span>{projects[1].title}</span></div>
+        </div>
+        <div className="project-card card-right">
+          <img src={projects[2].img} alt={projects[2].title} />
+          <div className="card-overlay"><span>{projects[2].title}</span></div>
         </div>
       </div>
+
+      {/* Row 2 */}
+      <div className="projects-row" data-row="2">
+        <div className="project-card card-left">
+          <img src={projects[3].img} alt={projects[3].title} />
+          <div className="card-overlay"><span>{projects[3].title}</span></div>
+        </div>
+        <div className="project-card card-center">
+          <img src={projects[4].img} alt={projects[4].title} />
+          <div className="card-overlay"><span>{projects[4].title}</span></div>
+        </div>
+        <div className="project-card card-right">
+          <img src={projects[5].img} alt={projects[5].title} />
+          <div className="card-overlay"><span>{projects[5].title}</span></div>
+        </div>
+      </div>
+
+      <style>{`
+        .projects-row {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+        }
+        
+        .project-card {
+          position: relative;
+          aspect-ratio: 4/5;
+          overflow: hidden;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        
+        .project-card img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.6s ease;
+        }
+        
+        .project-card:hover img {
+          transform: scale(1.04);
+        }
+        
+        .card-overlay {
+          position: absolute;
+          bottom: 20px;
+          left: 20px;
+          color: #fff;
+          font-size: 1.1rem;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          opacity: 0;
+          transform: translateY(10px);
+          transition: all 0.4s ease;
+        }
+        
+        .project-card:hover .card-overlay {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      `}</style>
     </section>
   )
 }
