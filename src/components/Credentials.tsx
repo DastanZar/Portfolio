@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -58,6 +58,15 @@ const credentials = [
 
 export function Credentials() {
   const container = useRef<HTMLElement>(null)
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY })
+    }
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [])
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -98,7 +107,13 @@ export function Credentials() {
         overflow: 'hidden',
       }}
     >
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', marginBottom: 80 }}>
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap'); .spray-font { font-family: 'Permanent Marker', cursive; }`}</style>
+      
+      <div className='pointer-events-none absolute inset-0 z-0' style={{ background: 'radial-gradient(circle 400px at ' + mousePos.x + 'px ' + mousePos.y + 'px, rgba(212, 168, 75, 0.15), transparent 80%)' }} />
+      
+      <h1 className='spray-font pointer-events-none absolute left-[-10%] top-[20%] z-0 w-[120%] rotate-[-15deg] text-center text-[12vw] leading-none text-[#F5F0E8]/5 opacity-20 select-none' style={{ textShadow: '0 0 15px rgba(245, 240, 232, 0.3), 5px 5px 20px rgba(245, 240, 232, 0.2)' }}>THE SIGNAL IN THE NOISE.</h1>
+      
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', marginBottom: 80, position: 'relative', zIndex: 10 }}>
         <span
           style={{
             fontFamily: "'JetBrains Mono', monospace",
@@ -131,6 +146,8 @@ export function Credentials() {
           maxWidth: 1200,
           margin: '0 auto',
           padding: '0 24px',
+          position: 'relative',
+          zIndex: 10,
         }}
       >
         {credentials.map((cred) => (
